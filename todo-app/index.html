@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tudu Chan - Your kawaii todo list app!">
+    <meta name="keywords" content="todo list app, todo list, todo app, todo">
+    
+    <meta property="og:title" content="Tudu Chan">
+    <meta property="og:description" content="Tudu Chan - Your kawaii todo list app!">
+    <meta property="og:image" content="https://tuduchan.netlify.app/mascot/tudu-chan.webp">
+    <meta property="og:url" content="https://tuduchan.netlify.app">
+    <meta property="og:type" content="website">
+
+    <title>Tudu Chan</title>
+
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Tudu Chan" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="app__header" id="app__header">
+        <div class="header__content">
+            <svg id="tuduChan" class="tudu-chan tudu-chan--idle" width="220" height="220" viewBox="0 0 220 220"
+                xmlns="http://www.w3.org/2000/svg" aria-label="Tudu Chan mascot">
+                <!-- Head -->
+                <circle class="chan__head" cx="110" cy="120" r="70" fill="#ffb3a7" />
+
+                <!-- Ears -->
+                <path class="chan__ear chan__ear--left" d="M55 65 Q45 20 85 55" fill="#ffb3a7" />
+                <path class="chan__ear chan__ear--right" d="M165 65 Q175 20 135 55" fill="#ffb3a7" />
+
+                <!-- Inner ears -->
+                <path class="chan__ear-inner chan__ear-inner--left" d="M65 65 Q58 35 85 58" fill="#ffe2db" />
+                <path class="chan__ear-inner chan__ear-inner--right" d="M155 65 Q162 35 135 58" fill="#ffe2db" />
+
+                <!-- Left whiskers -->
+                <g class="chan__whiskers chan__whiskers--left">
+                    <line x1="58" y1="125" x2="30" y2="120" stroke="#444" stroke-width="1.5" opacity="0.5"
+                        stroke-linecap="round" />
+                    <line x1="58" y1="135" x2="30" y2="140" stroke="#444" stroke-width="1.5" opacity="0.5"
+                        stroke-linecap="round" />
+                </g>
+
+                <!-- Right whiskers -->
+                <g class="chan__whiskers chan__whiskers--right">
+                    <line x1="162" y1="125" x2="190" y2="120" stroke="#444" stroke-width="1.5" opacity="0.5"
+                        stroke-linecap="round" />
+                    <line x1="162" y1="135" x2="190" y2="140" stroke="#444" stroke-width="1.5" opacity="0.5"
+                        stroke-linecap="round" />
+                </g>
+
+                <!-- Eyes -->
+                <g class="chan__eye chan__eye--left">
+                    <circle cx="85" cy="120" r="6" fill="#444" />
+                </g>
+                <g class="chan__eye chan__eye--right">
+                    <circle cx="135" cy="120" r="6" fill="#444" />
+                </g>
+
+                <!-- Nose -->
+                <ellipse class="chan__nose" cx="110" cy="132" rx="4" ry="3" fill="#ff9aa2" opacity="0.8" />
+
+                <!-- Blush -->
+                <ellipse class="chan__blush chan__blush--left" cx="70" cy="135" rx="10" ry="6" fill="#ff9aa2"
+                    opacity="0.7" />
+                <ellipse class="chan__blush chan__blush--right" cx="150" cy="135" rx="10" ry="6" fill="#ff9aa2"
+                    opacity="0.7" />
+
+                <!-- Mouth -->
+                <path class="chan__mouth" d="M100 140 Q110 148 120 140" stroke="#444" stroke-width="2" fill="none"
+                    stroke-linecap="round" />
+            </svg>
+
+            <h1 class="app__title">Tudu Chan</h1>
+        </div>
+        
+        <button id="theme__toggle" class="theme__toggle" type="button">
+            <img src="/icons/dark-mode-icon.svg" alt="dark-mode-icon">
+        </button>
+    </header>
+
+    <main class="todo__app" id="todo__app">
+
+        <!-- add todo form -->
+        <form class="todo__form" id="todo__form">
+            <input type="text" id="todo__input__title" class="todo__input todo__input--title" placeholder="+ Add Task"
+                autocomplete="off" required>
+            <div id="todo__priority__picker" class="todo__priority__picker priority__picker">
+                <button type="button" class="priority__dot priority__dot--high" data-priority="high"></button>
+                <button type="button" class="priority__dot priority__dot--medium priority__dot--selected"
+                    data-priority="medium"></button>
+                <button type="button" class="priority__dot priority__dot--low" data-priority="low"></button>
+            </div>
+        </form>
+
+        <!-- header: task summary, filter and sort controls -->
+        <header class="todo__header" id="todo__header">
+            <div class="todo__summary" id="todo__summary">
+                <span id="todo__count" class="todo__count" data-todo-action="count">
+                    <strong class="todo__count__number">0</strong> Tasks left
+                </span>
+            </div>
+
+            <div class="todo__actions" id="todo__actions">
+                <label for="todo__filter" class="visually__hidden">Filter by priority</label>
+                <select name="todo__filter" id="todo__filter" class="todo__filter" data-todo-action="filter">
+                    <option value="all">All</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+
+                <button type="button" id="todo__sort" class="todo__sort" data-todo-action="sort">
+                    <span class="todo__sort__icon">⇅</span>
+                    <span class="visually__hidden">Sort</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- list container -->
+        <section class="todo__list__container" id="todo__list">
+            <h2 class="visually__hidden">Active Tasks</h2>
+            <ul id="active__list" class="todo__list todo__list--active"></ul>
+
+            <div class="todo__completed__section" id="todo__completed__section">
+                <button type="button" class="todo__completed__toggle" id="todo__completed__toggle">
+                    <span class="todo__completed__icon">▼</span>
+                    <h2 class="todo__list__heading">Completed</h2>
+                </button>
+                <ul id="completed__list" class="todo__list todo__list--completed"></ul>
+            </div>
+        </section>
+
+        <!-- empty state -->
+        <div id="todo__empty__state" class="todo__empty__state empty__state hidden">
+            <div class="empty__state__art">
+                📋
+            </div>
+            <h2 class="empty__state__title">No tasks yet</h2>
+            <p class="empty__state__text">Tudu Chan is waiting (｡•́︿•̀｡)</p>
+        </div>
+    </main>
+
+
+    <script type="module" src="/src/app.js"></script>
+</body>
+
+</html>

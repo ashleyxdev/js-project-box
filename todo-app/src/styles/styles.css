@@ -1,0 +1,979 @@
+/* =========================
+   CSS VARIABLES - Peach Theme
+========================= */
+:root {
+  /* Light mode colors - Peach Theme */
+  --bg: #fff6f3;
+  --card: #ffffff;
+  --surface: #fffaf8;
+  --border: #ffe2db;
+  --text: #444444;
+  --text-secondary: #9a7b73;
+  --hover: #fff0ec;
+  --focus: #ff9f8c;
+  --focus-ring: rgba(255, 159, 140, 0.2);
+
+  /* Priority colors - Soft Pastels */
+  --priority-high: #ffb3a7;
+  --priority-medium: #ffd4a3;
+  --priority-low: #b8e6d5;
+
+  /* 8-point spacing system */
+  --space-1: 0.5rem; /* 8px */
+  --space-2: 1rem; /* 16px */
+  --space-3: 1.5rem; /* 24px */
+  --space-4: 2rem; /* 32px */
+  --space-5: 2.5rem; /* 40px */
+  --space-6: 3rem; /* 48px */
+
+  /* Font sizes (8-point based) */
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 1.75rem; /* 28px */
+
+  /* Border radius - More rounded */
+  --radius: 16px;
+  --radius-sm: 12px;
+  --radius-pill: 50px;
+
+  /* Transition durations for consistency */
+  --transition-fast: 0.15s;
+  --transition-normal: 0.25s;
+  --transition-slow: 0.3s;
+}
+
+/* Dark mode - Soft Peach Dark Theme */
+body.dark {
+  --bg: #2a1f1d;
+  --card: #3d2f2d;
+  --surface: #4a3937;
+  --border: #5c4542;
+  --text: #ffe2db;
+  --text-secondary: #d4b5ad;
+  --hover: #524240;
+  --focus: #ff9f8c;
+  --focus-ring: rgba(255, 159, 140, 0.25);
+}
+
+/* =========================
+   RESET & BASE
+========================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "M PLUS Rounded 1c", "Poppins", sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  padding: var(--space-4) var(--space-2);
+  min-height: 100vh;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+/* =========================
+   APP HEADER
+========================= */
+.app__header {
+  position: relative;
+  margin-bottom: var(--space-5);
+}
+
+.app__title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 950;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  text-shadow: 0 2px 8px rgba(255, 159, 140, 0.1);
+}
+
+.theme__toggle {
+  position: fixed;
+  top: var(--space-3);
+  right: var(--space-3);
+  border: none;
+  background: linear-gradient(135deg, #ff9f8c 0%, #ffb3a7 100%);
+  font-size: var(--text-lg);
+  cursor: pointer;
+  opacity: 0.9;
+  transition:
+    opacity var(--transition-fast) ease,
+    transform var(--transition-normal) ease,
+    box-shadow var(--transition-normal) ease;
+  padding: 0.75rem;
+  z-index: 10;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 4px 12px rgba(255, 159, 140, 0.3),
+    0 2px 4px rgba(255, 159, 140, 0.2);
+}
+
+.theme__toggle img {
+  width: 100%;
+}
+
+.theme__toggle:hover {
+  opacity: 1;
+  transform: scale(1.1) rotate(10deg);
+  box-shadow:
+    0 6px 16px rgba(255, 159, 140, 0.4),
+    0 3px 6px rgba(255, 159, 140, 0.3);
+}
+
+.theme__toggle:active {
+  transform: scale(1.05) rotate(5deg);
+}
+
+/* =========================
+   TODO APP CONTAINER
+========================= */
+.todo__app {
+  max-width: 420px;
+  margin: 0 auto;
+  background: var(--card);
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  border: none;
+  box-shadow:
+    0 8px 24px rgba(255, 159, 140, 0.12),
+    0 2px 8px rgba(255, 159, 140, 0.08);
+}
+
+/* =========================
+   TODO FORM (ADD NEW)
+========================= */
+.todo__form {
+  position: relative;
+  margin-bottom: var(--space-4);
+}
+
+.todo__input {
+  width: 100%;
+  padding: 0.875rem 5.5rem 0.875rem 1.125rem;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 400;
+  transition:
+    border-color var(--transition-normal) ease,
+    box-shadow var(--transition-normal) ease,
+    background var(--transition-normal) ease,
+    transform var(--transition-fast) ease;
+  box-shadow: 0 2px 8px rgba(255, 159, 140, 0.06);
+}
+
+.todo__input::placeholder {
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+.todo__input:focus {
+  outline: none;
+  border-color: var(--focus);
+  background: var(--card);
+  box-shadow:
+    0 0 0 4px var(--focus-ring),
+    0 4px 12px rgba(255, 159, 140, 0.15);
+  transform: translateY(-1px);
+}
+
+/* =========================
+   PRIORITY PICKER
+========================= */
+.todo__priority__picker,
+.priority__picker {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 1;
+}
+
+/* Hide priority picker in add form by default */
+.todo__form .todo__priority__picker {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-normal) ease;
+}
+
+/* Show priority picker when form has focus */
+.todo__form:focus-within .todo__priority__picker {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.priority__dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  border: 2px solid currentColor;
+  transition:
+    transform var(--transition-normal) ease,
+    box-shadow var(--transition-normal) ease,
+    background var(--transition-fast) ease;
+  flex-shrink: 0;
+}
+
+/* Priority colors - Soft Pastels */
+.priority__dot--high {
+  color: var(--priority-high);
+}
+
+.priority__dot--medium {
+  color: var(--priority-medium);
+}
+
+.priority__dot--low {
+  color: var(--priority-low);
+}
+
+/* Hover effect */
+.priority__dot:hover {
+  transform: scale(1.2);
+  box-shadow: 0 2px 8px currentColor;
+}
+
+/* Selected state - filled with inner hole */
+.priority__dot--selected {
+  background: currentColor;
+  box-shadow:
+    inset 0 0 0 4px var(--card),
+    0 2px 8px currentColor;
+  transform: scale(1.15);
+}
+
+/* =========================
+   TODO HEADER (CONTROLS)
+========================= */
+.todo__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  margin-bottom: var(--space-3);
+  border-bottom: 2px solid var(--border);
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--transition-normal) ease,
+    transform var(--transition-normal) ease;
+}
+
+.todo__header[style*="display: none"] {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.todo__summary {
+  flex-shrink: 0;
+}
+
+.todo__count {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.todo__count__number {
+  font-weight: 600;
+  color: var(--focus);
+  transition: color var(--transition-fast) ease;
+}
+
+.todo__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.todo__filter {
+  padding: 0.5rem 0.875rem;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    background var(--transition-normal) ease,
+    border-color var(--transition-normal) ease,
+    box-shadow var(--transition-normal) ease,
+    transform var(--transition-fast) ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239a7b73' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.625rem center;
+  background-size: 12px;
+  padding-right: 2.25rem;
+  min-width: 80px;
+  box-shadow: 0 2px 6px rgba(255, 159, 140, 0.08);
+}
+
+.todo__filter:hover {
+  background-color: var(--hover);
+  border-color: var(--focus);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(255, 159, 140, 0.12);
+}
+
+.todo__filter:focus {
+  outline: none;
+  border-color: var(--focus);
+  box-shadow:
+    0 0 0 4px var(--focus-ring),
+    0 3px 8px rgba(255, 159, 140, 0.15);
+  background-color: var(--card);
+}
+
+body.dark .todo__filter {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23d4b5ad' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
+}
+
+.todo__filter option {
+  padding: 0.5rem;
+  background: var(--card);
+  color: var(--text);
+  font-weight: 500;
+}
+
+.todo__sort {
+  padding: 0.5rem 0.75rem;
+  font-size: var(--text-sm);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    background var(--transition-normal) ease,
+    color var(--transition-normal) ease,
+    border-color var(--transition-normal) ease,
+    transform var(--transition-fast) ease,
+    box-shadow var(--transition-normal) ease;
+  line-height: 1;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(255, 159, 140, 0.08);
+}
+
+.todo__sort:hover {
+  background: var(--hover);
+  color: var(--focus);
+  border-color: var(--focus);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(255, 159, 140, 0.12);
+}
+
+.todo__sort:focus {
+  outline: none;
+  border-color: var(--focus);
+  box-shadow:
+    0 0 0 4px var(--focus-ring),
+    0 3px 8px rgba(255, 159, 140, 0.15);
+}
+
+.todo__sort__icon {
+  display: inline-block;
+  font-size: var(--text-base);
+}
+
+/* =========================
+   TODO LIST CONTAINER
+========================= */
+.todo__list__container {
+  margin-bottom: var(--space-3);
+}
+
+.todo__list__heading {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 0;
+  letter-spacing: 0.03em;
+}
+
+.todo__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  margin-bottom: 0;
+}
+
+.todo__list--active {
+  margin-bottom: 0;
+}
+
+.todo__list--completed {
+  margin-bottom: 0;
+  margin-top: var(--space-2);
+  max-height: 0;
+  overflow: hidden;
+  transition:
+    max-height var(--transition-slow) ease,
+    margin-top var(--transition-slow) ease,
+    opacity var(--transition-slow) ease;
+  opacity: 0;
+}
+
+.todo__completed__section {
+  margin-top: var(--space-3);
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--transition-normal) ease,
+    transform var(--transition-normal) ease;
+}
+
+.todo__completed__section[style*="display: none"] {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.todo__completed__toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2) 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: opacity var(--transition-fast) ease;
+  text-align: left;
+}
+
+.todo__completed__toggle:hover {
+  opacity: 0.7;
+}
+
+.todo__completed__icon {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  transition: transform var(--transition-slow) ease;
+  display: inline-block;
+}
+
+.todo__completed__section.collapsed .todo__completed__icon {
+  transform: rotate(-90deg);
+}
+
+.todo__completed__count {
+  margin-left: auto;
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  background: var(--surface);
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+  transition:
+    background var(--transition-fast) ease,
+    color var(--transition-fast) ease;
+  box-shadow: 0 2px 6px rgba(255, 159, 140, 0.08);
+}
+
+.todo__completed__section:not(.collapsed) .todo__list--completed {
+  max-height: 2000px;
+  opacity: 1;
+}
+
+/* =========================
+   TODO ITEM ROW
+========================= */
+.todo__list li {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 0.875rem 1.125rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  transition:
+    background var(--transition-normal) ease,
+    border-color var(--transition-normal) ease,
+    opacity var(--transition-normal) ease,
+    transform var(--transition-normal) ease,
+    box-shadow var(--transition-normal) ease;
+  position: relative;
+  animation: todoItemFadeIn var(--transition-normal) ease;
+  box-shadow:
+    0 2px 8px rgba(255, 159, 140, 0.08),
+    0 1px 3px rgba(255, 159, 140, 0.06);
+}
+
+@keyframes todoItemFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.todo__list li:hover {
+  background: var(--hover);
+  transform: translateY(-2px);
+  box-shadow:
+    0 4px 12px rgba(255, 159, 140, 0.12),
+    0 2px 6px rgba(255, 159, 140, 0.08);
+}
+
+.todo__list li:has(form) {
+  background: var(--hover);
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(255, 159, 140, 0.12);
+}
+
+/* =========================
+   PRIORITY BAR
+========================= */
+.priority__bar {
+  width: 4px;
+  align-self: stretch;
+  border-radius: var(--radius-pill);
+  flex-shrink: 0;
+  opacity: 0.8;
+  transition:
+    background var(--transition-normal) ease,
+    opacity var(--transition-fast) ease;
+}
+
+.priority__bar--high {
+  background: linear-gradient(180deg, var(--priority-high) 0%, #ff9a8f 100%);
+}
+
+.priority__bar--medium {
+  background: linear-gradient(180deg, var(--priority-medium) 0%, #ffc78f 100%);
+}
+
+.priority__bar--low {
+  background: linear-gradient(180deg, var(--priority-low) 0%, #a0d9c5 100%);
+}
+
+.todo__list li:hover .priority__bar {
+  opacity: 1;
+}
+
+/* =========================
+   CHECKBOX
+========================= */
+.todo__list input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  flex-shrink: 0;
+  accent-color: var(--focus);
+  transition: transform var(--transition-normal) ease;
+  border-radius: 6px;
+}
+
+.todo__list input[type="checkbox"]:hover {
+  transform: scale(1.15);
+}
+
+/* =========================
+   TODO TITLE
+========================= */
+.todo__list p {
+  flex: 1;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  cursor: pointer;
+  user-select: none;
+  word-break: break-word;
+  font-weight: 400;
+  transition:
+    color var(--transition-normal) ease,
+    opacity var(--transition-normal) ease;
+}
+
+.todo__list input[type="checkbox"]:checked + p {
+  text-decoration: line-through;
+  text-decoration-thickness: 1.5px;
+  text-decoration-color: var(--text-secondary);
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+/* =========================
+   EDIT MODE
+========================= */
+.todo__edit__wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  animation: editFormFadeIn var(--transition-normal) ease;
+}
+
+@keyframes editFormFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.todo__input--edit {
+  width: 100%;
+  padding: 0.75rem 5.5rem 0.75rem 1rem;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--card);
+  color: var(--text);
+  font-weight: 400;
+  transition:
+    border-color var(--transition-normal) ease,
+    box-shadow var(--transition-normal) ease,
+    background var(--transition-normal) ease;
+  box-shadow: 0 2px 8px rgba(255, 159, 140, 0.08);
+}
+
+.todo__input--edit:focus {
+  outline: none;
+  border-color: var(--focus);
+  background: var(--card);
+  box-shadow:
+    0 0 0 4px var(--focus-ring),
+    0 4px 12px rgba(255, 159, 140, 0.15);
+}
+
+.todo__edit__wrapper .todo__priority__picker,
+.todo__edit__wrapper .priority__picker {
+  right: 0.75rem;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* =========================
+   DELETE BUTTON
+========================= */
+.todo__list button[data-todo-action="delete"] {
+  border: none;
+  background: transparent;
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity var(--transition-normal) ease,
+    color var(--transition-normal) ease,
+    transform var(--transition-normal) ease;
+  padding: 0.375rem;
+  flex-shrink: 0;
+  line-height: 1;
+  border-radius: 50%;
+}
+
+.todo__list li:hover button[data-todo-action="delete"] {
+  opacity: 0.6;
+}
+
+.todo__list button[data-todo-action="delete"]:hover {
+  opacity: 1 !important;
+  color: var(--priority-high);
+  transform: scale(1.2) rotate(5deg);
+  background: rgba(255, 179, 167, 0.15);
+}
+
+/* =========================
+   FILTERS (COMMENTED OUT)
+========================= */
+.todo__filters {
+  display: flex;
+  gap: var(--space-1);
+  margin-top: var(--space-3);
+  padding-top: var(--space-2);
+  border-top: 2px solid var(--border);
+}
+
+.todo__filter__btn {
+  flex: 1;
+  padding: var(--space-1) 0.875rem;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    background var(--transition-normal) ease,
+    color var(--transition-normal) ease,
+    border-color var(--transition-normal) ease,
+    transform var(--transition-fast) ease,
+    box-shadow var(--transition-normal) ease;
+  box-shadow: 0 2px 6px rgba(255, 159, 140, 0.08);
+}
+
+.todo__filter__btn:hover {
+  background: var(--hover);
+  color: var(--text);
+  border-color: var(--focus);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(255, 159, 140, 0.12);
+}
+
+.todo__filter__btn--selected {
+  background: linear-gradient(135deg, var(--focus) 0%, #ffb3a7 100%);
+  color: #ffffff;
+  border-color: var(--focus);
+  box-shadow: 0 4px 12px rgba(255, 159, 140, 0.3);
+}
+
+/* =========================
+   EMPTY STATES
+========================= */
+.todo__empty__state,
+.empty__state {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-6) var(--space-3);
+  gap: 0.875rem;
+  min-height: 240px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity var(--transition-normal) ease,
+    transform var(--transition-normal) ease;
+}
+
+.todo__empty__state[style*="display: flex"],
+.empty__state[style*="display: flex"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.empty__state.hidden {
+  display: none;
+}
+
+.empty__state__art {
+  font-size: 4rem;
+  opacity: 0.5;
+  margin-bottom: var(--space-1);
+  animation: emptyStateArtBounce 2s ease-in-out infinite;
+  filter: drop-shadow(0 4px 8px rgba(255, 159, 140, 0.2));
+}
+
+@keyframes emptyStateArtBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.empty__state__title {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.empty__state__text {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  max-width: 280px;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.empty__filter__state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-4) var(--space-2);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  border: none;
+  background: transparent;
+  opacity: 0.6;
+  transition: opacity var(--transition-normal) ease;
+  font-weight: 300;
+}
+
+.empty__filter__state:hover {
+  opacity: 1;
+}
+
+/* =========================
+   UTILITY CLASSES
+========================= */
+.visually__hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.no__select {
+  user-select: none;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .header__content {
+    gap: 0.875rem;
+  }
+
+  .tudu-chan {
+    width: clamp(60px, 12vw, 75px);
+    height: clamp(60px, 12vw, 75px);
+  }
+
+  .app__title {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: var(--space-3) 0.875rem;
+  }
+
+  .todo__app {
+    padding: var(--space-3);
+  }
+
+  .header__content {
+    gap: 0.625rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tudu-chan {
+    width: 65px;
+    height: 65px;
+  }
+
+  .app__title {
+    font-size: 1.5rem;
+  }
+
+  .theme__toggle {
+    top: var(--space-2);
+    right: var(--space-2);
+    width: 44px;
+    height: 44px;
+    font-size: var(--text-base);
+  }
+
+  .todo__header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+
+  .todo__summary {
+    flex-shrink: 1;
+    min-width: fit-content;
+  }
+
+  .todo__actions {
+    flex-shrink: 0;
+    justify-content: flex-end;
+  }
+
+  .todo__filter {
+    min-width: 70px;
+    padding: 0.5rem 2rem 0.5rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .todo__sort {
+    padding: 0.5rem 0.625rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .header__content {
+    gap: 0.5rem;
+  }
+
+  .tudu-chan {
+    width: 55px;
+    height: 55px;
+  }
+
+  .app__title {
+    font-size: 1.25rem;
+  }
+
+  .todo__header {
+    gap: var(--space-1);
+  }
+
+  .todo__count {
+    font-size: 0.75rem;
+  }
+
+  .todo__filter {
+    min-width: 60px;
+    padding: 0.425rem 1.75rem 0.425rem 0.625rem;
+    font-size: 0.7rem;
+  }
+
+  .todo__sort {
+    padding: 0.425rem 0.5rem;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

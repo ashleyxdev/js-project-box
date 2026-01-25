@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><style>
+    #light-icon {
+      display: inline;
+    }
+    #dark-icon {
+      display: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      #light-icon {
+        display: none;
+      }
+      #dark-icon {
+        display: inline;
+      }
+    }
+  </style><g id="light-icon"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><g clip-path="url(#SvgjsClipPath1182)"><rect width="1000" height="1000" fill="#ffffff"></rect><g transform="matrix(4.545454545454546,0,0,4.545454545454546,-5.684341886080802e-14,-5.684341886080802e-14)"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="220" height="220"><svg width="220" height="220" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" aria-label="Tudu Chan mascot">
+
+    <!-- Head -->
+    <circle cx="110" cy="120" r="70" fill="#ffb3a7"></circle>
+
+    <!-- Ears -->
+    <path d="M55 65 Q45 20 85 55" fill="#ffb3a7"></path>
+    <path d="M165 65 Q175 20 135 55" fill="#ffb3a7"></path>
+
+    <!-- Inner ears -->
+    <path d="M65 65 Q58 35 85 58" fill="#ffe2db"></path>
+    <path d="M155 65 Q162 35 135 58" fill="#ffe2db"></path>
+
+    <!-- Left whiskers -->
+    <line x1="58" y1="125" x2="30" y2="120" stroke="#444" stroke-width="1.5" opacity="0.5" stroke-linecap="round"></line>
+    <line x1="58" y1="135" x2="30" y2="140" stroke="#444" stroke-width="1.5" opacity="0.5" stroke-linecap="round"></line>
+
+    <!-- Right whiskers -->
+    <line x1="162" y1="125" x2="190" y2="120" stroke="#444" stroke-width="1.5" opacity="0.5" stroke-linecap="round"></line>
+    <line x1="162" y1="135" x2="190" y2="140" stroke="#444" stroke-width="1.5" opacity="0.5" stroke-linecap="round"></line>
+
+    <!-- Eyes -->
+    <circle cx="85" cy="120" r="6" fill="#444"></circle>
+    <circle cx="135" cy="120" r="6" fill="#444"></circle>
+
+    <!-- Nose -->
+    <ellipse cx="110" cy="132" rx="4" ry="3" fill="#ff9aa2" opacity="0.8"></ellipse>
+
+    <!-- Blush -->
+    <ellipse cx="70" cy="135" rx="10" ry="6" fill="#ff9aa2" opacity="0.7"></ellipse>
+    <ellipse cx="150" cy="135" rx="10" ry="6" fill="#ff9aa2" opacity="0.7"></ellipse>
+
+    <!-- Mouth -->
+    <path d="M100 140 Q110 148 120 140" stroke="#444" stroke-width="2" fill="none" stroke-linecap="round"></path>
+</svg></svg></g></g><defs><clipPath id="SvgjsClipPath1182"><rect width="1000" height="1000" x="0" y="0" rx="500" ry="500"></rect></clipPath></defs></svg></g><g id="dark-icon"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><g><g transform="matrix(4.545454545454546,0,0,4.545454545454546,-5.684341886080802e-14,-5.684341886080802e-14)"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="220" height="220"><svg width="220" height="220" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" aria-label="Tudu Chan mascot">
+
+    <!-- Head -->
+    <circle cx="110" cy="120" r="70" fill="#ffb3a7"></circle>
+
+    <!-- Ears -->
+    <path d="M55 65 Q45 20 85 55" fill="#ffb3a7"></path>
+    <path d="M165 65 Q175 20 135 55" fill="#ffb3a7"></path>
+
+    <!-- Inner ears -->
+    <path d="M65 65 Q58 35 85 58" fill="#ffe2db"></path>
+    <path d="M155 65 Q162 35 135 58" fill="#ffe2db"></path>
+
+    <!-- Left whiskers -->
+    <line x1="58" y1="125" x2="30" y2="120" stroke="#444" stroke-width="1.5" opacity="0.5" stroke-linecap="round"></line>
+    <line x1="58" y1="135" x2="30" y2="140" stroke="#444" stroke-width="1.5" opacity="0.5" stroke-linecap="round"></line>
+
+    <!-- Right whiskers -->
+    <line x1="162" y1="125" x2="190" y2="120" stroke="#444" stroke-width="1.5" opacity="0.5" stroke-linecap="round"></line>
+    <line x1="162" y1="135" x2="190" y2="140" stroke="#444" stroke-width="1.5" opacity="0.5" stroke-linecap="round"></line>
+
+    <!-- Eyes -->
+    <circle cx="85" cy="120" r="6" fill="#444"></circle>
+    <circle cx="135" cy="120" r="6" fill="#444"></circle>
+
+    <!-- Nose -->
+    <ellipse cx="110" cy="132" rx="4" ry="3" fill="#ff9aa2" opacity="0.8"></ellipse>
+
+    <!-- Blush -->
+    <ellipse cx="70" cy="135" rx="10" ry="6" fill="#ff9aa2" opacity="0.7"></ellipse>
+    <ellipse cx="150" cy="135" rx="10" ry="6" fill="#ff9aa2" opacity="0.7"></ellipse>
+
+    <!-- Mouth -->
+    <path d="M100 140 Q110 148 120 140" stroke="#444" stroke-width="2" fill="none" stroke-linecap="round"></path>
+</svg></svg></g></g></svg></g></svg>
