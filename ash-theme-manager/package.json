@@ -1,0 +1,30 @@
+{
+  "name": "ash-theme-manager",
+  "version": "1.0.0",
+  "description": "Lightweight vanilla JS theme manager with system dark mode sync",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "types/index.d.ts",
+  "files": [
+    "dist",
+    "types"
+  ],
+  "keywords": [
+    "theme",
+    "dark-mode",
+    "vanilla-js",
+    "ui",
+    "frontend",
+    "javascript"
+  ],
+  "author": "Ashish Birajdar",
+  "license": "MIT",
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --format=esm --outfile=dist/index.js",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "esbuild": "^0.27.2"
+  }
+}
