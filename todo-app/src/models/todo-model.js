@@ -67,7 +67,7 @@ export default class TodoModel {
   }
 
   // does not mutate localstorage
-  
+
   sortTodos() {
     this.todos = this.todos.sort(
       (todoA, todoB) =>
@@ -99,5 +99,9 @@ export default class TodoModel {
 
   getLowPriorityTodos() {
     return this.todos.filter((todo) => todo.priority === PRIORITY.low);
+  }
+
+  hasTodos() {
+    return this.todos.length > 0;
   }
 }

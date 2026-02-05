@@ -1,7 +1,6 @@
 import createTodoItem from "../components/todo-item.js";
 import createEmptyFilterMsg from "../components/empty-filter-msg.js";
-import enterEditMode from "./edit-mode.js";
-import handlePrioritySelect from "./priority-picker.js";
+import createTodoEditForm from "../components/todo-edit-form.js";
 
 export default class TodoView {
   constructor() {
@@ -24,8 +23,8 @@ export default class TodoView {
 
     // header container
     this.todoHeader = document.getElementById("todo__header");
-    this.todoCount = this.todoHeader.querySelector("[data-todo-action='count']");
-    this.todoFilter = this.todoHeader.querySelector("[data-todo-action='filter']");
+    this.todoCount = this.todoHeader.querySelector("[data-todo-action='count']",);
+    this.todoFilter = this.todoHeader.querySelector("[data-todo-action='filter']",);
     this.todoSort = this.todoHeader.querySelector("[data-todo-action='sort']");
 
     // list container
@@ -40,6 +39,9 @@ export default class TodoView {
   }
 
   _initState() {
+    // input field state of add todo form
+    this.currentTitleInput = "";
+
     // priority state of add todo form
     this.currentPriority = "medium";
 
@@ -60,26 +62,50 @@ export default class TodoView {
   }
 
   _bindEvents() {
-    document.addEventListener("selectstart", (e) => e.preventDefault());
+    document.addEventListener("selectstart", (e) => {
+      e.preventDefault();
+    });
+
     this.todoForm.addEventListener("submit", (e) => {
       e.preventDefault();
+      this.currentTitleInput = this.titleInput.value.trim();
       this.onAddTodo();
     });
-    this.todoList.addEventListener("click", this._handleTodoListClick);
-    this.todoList.addEventListener("dblclick", this._handleTodoListDblClick);
-    this.todoFilter.addEventListener("change", this._handleFilter);
-    this.todoSort.addEventListener("click", (e) => {
-      this.onSortTodos();
+
+    this.priorityPicker.addEventListener("click", (e) => {
+      this.currentPriority = this._handlePrioritySelect(e);
     });
-    this.priorityPicker.addEventListener(
-      "click",
-      this._handlePrioritySelectClick,
-    );
-    // Prevent mousedown on priority picker buttons to maintain input focus
+
+    // Prevent mousedown on picker to maintain input focus
     this.priorityPicker.addEventListener("mousedown", (e) => {
       e.preventDefault();
     });
-    this.completedToggle.addEventListener("click", this._handleCompletedToggle);
+
+    this.todoFilter.addEventListener("change", (e) => {
+      this.currentFilter = this.todoFilter.value;
+      this.onFilterChange();
+    });
+
+    this.todoSort.addEventListener("click", (e) => {
+      this.onSortTodos();
+    });
+
+    this.todoList.addEventListener("click", (e) => {
+      this._handleTodoListClick(e);
+    });
+
+    this.todoList.addEventListener("dblclick", (e) => {
+      const context = this._getEditContext(e);
+      if (!context) return;
+      this._enterEditMode({ ...context });
+    });
+
+    this.completedToggle.addEventListener("click", (e) => {
+      this.isCompletedCollapsed = !this.isCompletedCollapsed;
+      this.isCompletedCollapsed
+        ? this.completedSection.classList.add("collapsed")
+        : this.completedSection.classList.remove("collapsed");
+    });
   }
 
   // PUBLIC API
@@ -109,42 +135,54 @@ export default class TodoView {
   }
 
   getState() {
-    const title = this.titleInput.value.trim();
+    const title = this.currentTitleInput;
     const priority = this.currentPriority;
     const filter = this.currentFilter;
-    return { title, priority, filter};
+    return { title, priority, filter };
   }
 
   resetState() {
     this.titleInput.value = "";
-
     this.currentPriority = "medium";
+    this.currentFilter = "all";
+
     this.priorityPicker
       .querySelectorAll("button")
       .forEach((btn) =>
-        btn.dataset.priority === "medium"
+        btn.dataset.priority === this.currentPriority
           ? btn.classList.add("priority__dot--selected")
           : btn.classList.remove("priority__dot--selected"),
       );
-
-    this.currentFilter = "all";
-    this.todoFilter.value = "all";
+    this.todoFilter.value = this.currentFilter;
   }
 
-  render(todos, count) {
-    const hasTodos = todos.length > 0;
-
-    this._renderCount(count);
+  render(todos, hasTodos, count) {
     this._renderEmptyState(hasTodos);
     if (!hasTodos) return;
+    this._renderCount(count);
     this._renderLists(todos);
   }
 
   // RENDER HELPERS
 
+  _renderEmptyState(hasTodos) {
+    this.emptyState.style.display = hasTodos ? "none" : "flex";
+    this.todoHeader.style.display = hasTodos ? "flex" : "none";
+    this.todoList.style.display = hasTodos ? "block" : "none";
+  }
+
+  _renderCount(count) {
+    const html = `
+      <strong class="todo__count__number">${count}</strong>
+      ${count === 1 ? "Item" : "Items"} left
+      `;
+    this.todoCount.replaceChildren();
+    this.todoCount.insertAdjacentHTML("afterbegin", html);
+  }
+
   _renderLists(todos) {
-    this.completedList.replaceChildren();
     this.activeList.replaceChildren();
+    this.completedList.replaceChildren();
 
     const activeTodos = todos
       .filter((todo) => !todo.completed)
@@ -156,43 +194,36 @@ export default class TodoView {
 
     activeTodos.length
       ? this.activeList.append(...activeTodos)
-      : this.activeList.append(createEmptyFilterMsg("No tasks here"));
+      : this.activeList.append(createEmptyFilterMsg("No tasks"));
 
     completedTodos.length
       ? this.completedList.append(...completedTodos)
-      : this.completedList.append(createEmptyFilterMsg("No tasks here"));
-  }
-
-  _renderEmptyState(hasTodos) {
-    this.emptyState.style.display = hasTodos ? "none" : "flex";
-    this.todoHeader.style.display = hasTodos ? "flex" : "none";
-    this.completedSection.style.display = hasTodos ? "block" : "none";
-  }
-
-  _renderCount(count) {
-    const html = `
-      <strong class="todo__count__number">${count}</strong>
-      ${count === 1 ? "Task" : "Tasks"} left
-      `;
-    this.todoCount.replaceChildren();
-    this.todoCount.insertAdjacentHTML("afterbegin", html);
+      : this.completedList.append(createEmptyFilterMsg("No tasks"));
   }
 
   // EVENT HANDLERS
 
-  _handlePrioritySelectClick = (e) => {
-    this.currentPriority = handlePrioritySelect({
-      event: e,
-      picker: this.priorityPicker,
-      input: this.titleInput,
-      currentPriority: this.currentPriority,
-  });
-  };
+  _handlePrioritySelect(
+    event,
+    picker = this.priorityPicker,
+    input = this.titleInput,
+    currentPriority = this.currentPriority,
+  ) {
+    event.preventDefault();
 
-  _handleFilter = (e) => {
-    this.currentFilter = this.todoFilter.value;
-    this.onFilterChange();
-  };
+    const el = event.target.closest("[data-priority]");
+    if (!el) return currentPriority;
+
+    picker
+      .querySelectorAll("button")
+      .forEach((btn) => btn.classList.remove("priority__dot--selected"));
+
+    el.classList.add("priority__dot--selected");
+
+    input.focus(); // *
+
+    return el.dataset.priority;
+  }
 
   _handleTodoListClick = (e) => {
     const actionEl = e.target.closest("[data-todo-action]");
@@ -208,14 +239,7 @@ export default class TodoView {
     else if (action === "delete") this.onDeleteTodo(id);
   };
 
-  _handleTodoListDblClick = (e) => {
-    const context = this._getEditContext(e);
-    if (!context) return;
-    enterEditMode({
-      ...context,
-      onEditTodo: this.onEditTodo,
-    });
-  };
+  // EDIT EVENT HELPERS
 
   _getEditContext(e) {
     if (this.todoList.querySelector("form")) return null; // *
@@ -231,11 +255,72 @@ export default class TodoView {
     };
   }
 
-  _handleCompletedToggle = (e) => {
-    this.isCompletedCollapsed = !this.isCompletedCollapsed;
+  _enterEditMode({ id, title, priority, actionEl }) {
+    let currentPriority = priority;
 
-    this.isCompletedCollapsed
-      ? this.completedSection.classList.add("collapsed")
-      : this.completedSection.classList.remove("collapsed");
-  };
+    const { form, input, picker } = createTodoEditForm(title, priority);
+
+    actionEl.replaceWith(form);
+    input.focus(); // *
+    input.select(); // *
+
+    // Track if we're clicking on the picker to prevent blur
+    let isClickingPicker = false;
+
+    // Track if edit form submited to avoid submit + blur double-call
+    let isSubmitted = false;
+
+    // for similar reason as above escape + blur double-call
+    let isCancelled = false;
+
+    // Prevent mousedown on picker to maintain input focus
+    picker.addEventListener("mousedown", (e) => {
+      e.preventDefault();
+      isClickingPicker = true;
+    });
+
+    picker.addEventListener("click", (e) => {
+      isClickingPicker = false;
+      const newPriority = this._handlePrioritySelect(
+        e,
+        picker,
+        input,
+        currentPriority,
+      );
+
+      if (newPriority) currentPriority = newPriority;
+    });
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        isCancelled = true;
+        form.replaceWith(actionEl);
+      }
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      isSubmitted = true;
+
+      this.onEditTodo(id, {
+        title: input.value,
+        priority: currentPriority,
+      });
+
+      form.replaceWith(actionEl);
+    });
+
+    input.addEventListener("blur", () => {
+      // Don't close edit mode if clicking on priority picker
+      // Don't trigger blur if submited with enter or cancelled with esc
+      if (isClickingPicker || isSubmitted || isCancelled) return;
+
+      this.onEditTodo(id, {
+        title: input.value,
+        priority: currentPriority,
+      });
+
+      form.replaceWith(actionEl);
+    }); // *
+  }
 }

@@ -16,21 +16,22 @@ export default class TodoController {
   }
 
   _renderApp() {
+    const hasTodos = this.model.hasTodos();
     const count = this.model.getActiveTodos().length;
-    const {filter} = this.view.getState();
+    const { filter } = this.view.getState();
 
     switch (filter) {
       case "high":
-        this.view.render(this.model.getHighPriorityTodos(), count);
+        this.view.render(this.model.getHighPriorityTodos(), hasTodos, count);
         break;
       case "medium":
-        this.view.render(this.model.getMediumPriorityTodos(), count);
+        this.view.render(this.model.getMediumPriorityTodos(), hasTodos, count);
         break;
       case "low":
-        this.view.render(this.model.getLowPriorityTodos(), count);
+        this.view.render(this.model.getLowPriorityTodos(), hasTodos, count);
         break;
       default:
-        this.view.render(this.model.getTodos(), count);
+        this.view.render(this.model.getTodos(), hasTodos, count);
         break;
     }
   }
@@ -66,5 +67,5 @@ export default class TodoController {
   handleSortTodos = () => {
     this.model.sortTodos();
     this._renderApp();
-  }
+  };
 }

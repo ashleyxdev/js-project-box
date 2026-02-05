@@ -1,7 +1,6 @@
-export default 
-function createTodoEditForm(title, priority) {
-  const wrapper = document.createElement("form");
-  wrapper.className = "todo__edit__wrapper";
+export default function createTodoEditForm(title, priority) {
+  const form = document.createElement("form");
+  form.className = "todo__edit__wrapper";
 
   const input = document.createElement("input");
   input.value = title;
@@ -21,7 +20,7 @@ function createTodoEditForm(title, priority) {
     picker.append(btn);
   });
 
-  wrapper.append(input, picker);
+  form.append(input, picker);
 
-  return { wrapper, input, picker };
+  return { form, input, picker };
 }
