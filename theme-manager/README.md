@@ -65,4 +65,4 @@ Result:
 
 ## Live Demo — Theme Manager
 
-🌐 https://ashleyxdev.github.io/js-project-box/
+🌐 https://ash-theme-manager.netlify.app/
