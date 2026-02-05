@@ -30,7 +30,6 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: lts/*
-          cache: 'npm'
 
       - name: Install dependencies
         working-directory: demo-sites/theme-manager-demo
