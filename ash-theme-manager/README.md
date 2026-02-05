@@ -60,3 +60,9 @@ Result:
 | `toggleMode()` | Switch mode            |
 | `reset()`      | Clear storage          |
 | `destroy()`    | Remove system listener |
+
+---
+
+## Live Demo — Theme Manager
+
+🌐 https://ashleyxdev.github.io/js-project-box/
